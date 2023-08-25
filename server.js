@@ -52,6 +52,7 @@ app.delete("/v1/joyas/:id", async (req, res)=>{
     }
     //resultado==0?res.sendStatus(404):res.sendStatus(200)
 })
+//endpoint actualizar/update
 app.put("/v1/joyas/:id", async (req, res)=>{
     if (req.body.nombre){
     const resultado = await joya.actualizar(req.body, req.params.id)
