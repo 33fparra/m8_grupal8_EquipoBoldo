@@ -17,7 +17,7 @@ export class Joya{
         pool.release;
         return resultado.rows;   
     }
-    //falta aca el filtro por material
+
     async listarTodo(){
         //punto 4
         const resultado = await pool.query(`select id, nombre,material,peso,precio, created_at, updated_at from joyas order by nombre`);

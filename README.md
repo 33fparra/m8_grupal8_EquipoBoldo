@@ -8,11 +8,11 @@
 📝 La joyería "Gemas Preciosas" es una empresa familiar que se dedica a la venta de joyas finas y personalizadas. La joyería ha experimentado un crecimiento significativo en los últimos años y ha decidido digitalizar su proceso de registro y seguimiento de joyas para mejorar la eficiencia y la gesƟón de su inventario. Este será el comienzo del proyecto por lo cual te solicitan preparar el servidor que tendrá toda la lógica necesaria para el desarrollo:
 Requerimientos: 
  Implementa un servidor con express uƟlizando el puerto 3000. X
- Disponibiliza una ruta para, crear, editar, eliminar y obtener todas las joyas.  1/2
- Disponibiliza dos rutas que permitan buscar una joya por el nombre y un filtro por material, (repasar creacion de filtros)
-Ambas tendrán la opción de ordenar la información ascendente o descendente (opcional). 
+ Disponibiliza una ruta para, crear, editar, eliminar y obtener todas las joyas.  X falta editar
+ Disponibiliza dos rutas que permitan buscar una joya por el nombre y un filtro por material, (repasar creacion de filtros) X
+Ambas tendrán la opción de ordenar la información ascendente o descendente (opcional).esto me falta 
  La ruta para crear debe responder con la información de la joya creada, además se necesita un id correlativo a la canƟdad de joyas creadas. (serial ok)
- La ruta para editar debe responder con el objeto editado. 
+ La ruta para editar debe responder con el objeto editado. ??????
  La ruta para eliminar debe responder con un boolean. (true false)
  Y la ruta para obtener las joyas debe responder con un Array de objetos. ()
 

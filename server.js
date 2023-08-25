@@ -11,8 +11,13 @@ const app = express();
 const joya = new Joya();
 
 app.use(express.json());
+//ruta crear (esta buena)
+app.post("/v1/joyas", async (req, res)=>{
+    //punto 16
+     res.status(201).json(await joya.crear(req.body.nombre,req.body.material, req.body.peso, req.body.precio));
+})
 
-//punto 20
+//listarTodo (esta buena)
 app.get("/v1/joyas", async(req, res) => {
     try{
         res.json(await joya.listarTodo());
@@ -34,19 +39,16 @@ app.get("/v1/joyas/nombre/:nombre", async(req, res) =>{
     res.json(await joya.listarNombre(req.params.nombre));
 });
 
-//ruta crear
-app.post("/v1/joyas", async (req, res)=>{
-    //punto 16
-     res.status(201).json(await joya.crear(req.body.nombre,req.body.material, req.body.peso, req.body.precio));
-})
+
 //delete
 app.delete("/v1/joyas/:id", async (req, res)=>{
     //punto 16
-    res.send(await joya.eliminar(req.params.id)) //como estamos recuperando de la url usamos el params
+   const resultado = await joya.eliminar(req.params.id) //como estamos recuperando de la url usamos el params
     if(!resultado){ //resultado==0 / !resultado==1
         res.sendStatus(404)
     }else{
         res.sendStatus(200)
+        console.log("Joya eliminada con exito")
     }
     //resultado==0?res.sendStatus(404):res.sendStatus(200)
 })
