@@ -13,28 +13,31 @@ export class Joya{
     //punto 15
     async crear(nombre, material, peso, precio){ //duda solo va por el nombre
         //punto 19
-        const resultado = await pool.query(`insert into joyas (nombre,material,peso,precio,created_at, updated_at) values ($1, $2, $3, $4, now(), now()) RETURNING id`,[nombre, material, peso, precio]); 
+        const resultado = await pool.query(`insert into joyas (nombre,material,peso,precio,created_at,
+        updated_at) values ($1, $2, $3, $4, now(),
+        now()) RETURNING id`,[nombre, material, peso, precio]); 
         pool.release;
         return resultado.rows;   
     }
 
     async listarTodo(){
         //punto 4
-        const resultado = await pool.query(`select id, nombre,material,peso,precio, created_at, updated_at from joyas order by nombre`);
+        const resultado = await pool.query(`select id, nombre,material,peso,precio,
+        created_at, updated_at from joyas order by nombre`);
         pool.release;
         return resultado.rows;
     }
 
     async listarMaterial(material){
         //punto 3
-        const resultado = await pool.query("select id,nombre,material,peso,precio, created_at, updated_at from joyas where material = $1", [material]);
+        const resultado = await pool.query("select id,nombre,material,peso,precio, created_at, updated_at from joyas where material = $1 order by nombre asc", [material]);
 
         // pool.release;
         return resultado.rows;
     }
     async listarNombre(nombre){
         //punto 3
-        const resultado = await pool.query("select id, nombre,material,peso,precio, created_at, updated_at from joyas where nombre = $1", [nombre]);
+        const resultado = await pool.query("select id, nombre,material,peso,precio, created_at, updated_at from joyas where nombre = $1 order by nombre desc", [nombre]);
         // pool.release;
         return resultado.rows;
     }
