@@ -50,7 +50,6 @@ export class Joya{
     async actualizar(nombre, id){ 
         //punto 3
         const resultado = await pool.query("update joyas set nombre=$2, material=$3,peso=$4,precio=$5,created_at=now() where id = $1", [id, nombre, material, peso, precio]); 
-        //de quien depende fiscalizar que los datos que actualizo son correctos? le correcponde a quien esta pidiendo el servicio
         pool.release;
         // console.log(resultado)
         return resultado.rows;
