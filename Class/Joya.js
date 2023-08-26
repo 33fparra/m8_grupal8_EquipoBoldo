@@ -37,7 +37,7 @@ export class Joya{
     }
     async listarNombre(nombre){
         //punto 3
-        const resultado = await pool.query("select id, nombre,material,peso,precio, created_at, updated_at from joyas where nombre = $1 order by nombre desc", [nombre]);
+        const resultado = await pool.query("select id, nombre,material,peso,precio, created_at, updated_at from joyas where nombre = $1 order by material desc", [nombre]);
         // pool.release;
         return resultado.rows;
     }
@@ -50,13 +50,13 @@ export class Joya{
         return resultado.rows;
     }
     // *validacion de estructura
-    async actualizar(nombre, id){ 
+    async actualizar(objeto, id){ 
         //punto 3
-        const resultado = await pool.query("update joyas set nombre=$2, material=$3,peso=$4,precio=$5,created_at=now() where id = $1", [id, nombre, material, peso, precio]); 
+        const resultado = await pool.query("update joyas set nombre=$2, material=$3,peso=$4,precio=$5,created_at=now() where id = $1", [id, objeto.nombre, objeto.material, objeto.peso, objeto.precio]); 
         //de quien depende fiscalizar que los datos que actualizo son correctos? le correcponde a quien esta pidiendo el servicio
         pool.release;
         // console.log(resultado)
-        return resultado.rows;
+        return resultado.rowCount;
     }
     //siempre simplificar 
 }
