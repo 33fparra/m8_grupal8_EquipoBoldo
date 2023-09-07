@@ -13,7 +13,7 @@ export class Joya{
     //punto 15
     async crear(nombre, material, peso, precio){ //duda solo va por el nombre
         //punto 19
-        const resultado = await pool.query(`insert into joyas (nombre,material,peso,precio,created_at, updated_at) values ($1, $2, $3, $4, now(), now()) RETURNING id`,[nombre, material, peso, precio]); 
+        const resultado = await pool.query(`insert into joyas (nombre,material,peso,precio,created_at, updated_at) values ($1, $2, $3, $4, now(), now()) RETURNING id, nombre, material, peso, precio`,[nombre, material, peso, precio]); 
         pool.release;
         return resultado.rows;   
     }
@@ -47,12 +47,23 @@ export class Joya{
         return resultado.rows;
     }
     // *validacion de estructura
-    async actualizar(nombre, id){ 
+    async actualizar(objeto, id){ 
         //punto 3
-        const resultado = await pool.query("update joyas set nombre=$2, material=$3,peso=$4,precio=$5,created_at=now() where id = $1", [id, nombre, material, peso, precio]); 
-        pool.release;
-        // console.log(resultado)
-        return resultado.rows;
+        try {
+            const resultado = await pool.query(
+                "UPDATE joyas SET nombre=$2, material=$3, peso=$4, precio=$5, updated_at=now() WHERE id = $1", 
+                [id, objeto.nombre, objeto.material, objeto.peso, objeto.precio]
+            ); 
+            return resultado.rowCount;
+        } catch (error) {
+            console.error("Error al actualizar la joya:", error);
+            throw error;
+        }
+        // const resultado = await pool.query("update joyas set nombre=$2, material=$3,peso=$4,precio=$5,created_at=now() where id = $1", [id, objeto.nombre, objeto.material, objeto.peso, objeto.precio]); 
+        // pool.release;
+        // // console.log(resultado)
+        // // return resultado.rows;
+        // return resultado.rowCount;
     }
     //siempre simplificar 
 }

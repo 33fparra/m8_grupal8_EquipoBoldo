@@ -14,7 +14,11 @@ app.use(express.json());
 //ruta crear (esta buena)
 app.post("/v1/joyas", async (req, res)=>{
     //punto 16
-     res.status(201).json(await joya.crear(req.body.nombre,req.body.material, req.body.peso, req.body.precio));
+    const joyas = await joya.crear(req.body.nombre,req.body.material, req.body.peso, req.body.precio)
+    console.log(joyas[0].id);
+     //res.status(201).json(await joya.crear(req.body.nombre,req.body.material, req.body.peso, req.body.precio));
+     res.status(200).send(`Joya Creada ${joyas[0].id}`);
+
 })
 
 //listarTodo (esta buena)
@@ -56,6 +60,7 @@ app.delete("/v1/joyas/:id", async (req, res)=>{
 app.put("/v1/joyas/:id", async (req, res)=>{
     if (req.body.nombre){
     const resultado = await joya.actualizar(req.body, req.params.id)
+    //console.log("Resultado de actualizar:", resultado);//quiero probar
     resultado==0?res.sendStatus(404):res.sendStatus(200); //aca uso ternario
     }else{
         res.sendStatus(400);
